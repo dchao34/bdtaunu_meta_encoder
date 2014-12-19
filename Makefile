@@ -7,7 +7,7 @@ LDFLAGS = $(shell root-config --libs) -Lcustom_cpp_utilities/lib -lCustomCPPUtil
 
 SHARED = -Wl,-rpath,custom_cpp_utilities/lib
 
-BINARIES = 
+BINARIES = code_bdtaunu
 
 all : $(BINARIES)
 

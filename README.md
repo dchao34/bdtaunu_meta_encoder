@@ -20,11 +20,15 @@ This repository is responsible for data coding in the bdtaunu analysis. Every re
 ## Data label codes
 + 0: Off peak data
 + 1: On peak data
++ 998: uds generic MC
++ 1005: ccbar generic MC
 + 1235: B+B- generic MC
 + 1237: B0B0bar generic MC
-+ 1005: ccbar generic MC
-+ 998: uds generic MC
 + 3429: tau+tau- generic MC
++ 11444: Signal MC mode 11444
++ 11445: Signal MC mode 11445
++ 11446: Signal MC mode 11446
++ 11447: Signal MC mode 11447
 
 ## Run codes
 + 1: Run1
