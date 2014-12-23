@@ -1,3 +1,6 @@
+#ifndef __ROOTREADER_H__
+#define __ROOTREADER_H__
+
 #include <TFile.h>
 #include <TTree.h>
 
@@ -71,3 +74,5 @@ class RootReader {
     void PrepareTreeFile(const char *root_fname, const char *root_trname);
     void ClearBuffer();
 };
+
+#endif

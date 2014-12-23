@@ -1,6 +1,3 @@
-#include <TFile.h>
-#include <TTree.h>
-
 #include <string>
 #include <iostream>
 #include <cassert>
@@ -8,10 +5,10 @@
 #include <utility>
 #include <dirent.h>
 
-#include "TableCache.h"
-#include "RootReader.h"
-#include "DataCoder.h"
-#include "AssignmentCsvWriter.h"
+#include <encode_meta_data/TableCache.h>
+#include <encode_meta_data/RootReader.h>
+#include <encode_meta_data/DataCoder.h>
+#include <encode_meta_data/AssignmentCsvWriter.h>
 
 using namespace std;
 
@@ -90,8 +87,8 @@ int main(int argc, char **argv) {
 
   // Cache pre-assigned event ID's as well as event weights.
   TableCache cache;
-  cache.cache_events("meta/generic_ml_assignment.csv");
-  cache.cache_event_weights("meta/event_weights.csv");
+  cache.cache_events("../cached/generic_ml_assignment.csv");
+  cache.cache_event_weights("../cached/event_weights.csv");
 
   // Construct a DataCoder to encode newly encountered events.
   DataCoder coder;
