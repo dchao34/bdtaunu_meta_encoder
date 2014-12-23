@@ -1,6 +1,33 @@
 #include <TFile.h>
 #include <TTree.h>
 
+/**
+ * @brief
+ * Class to read ROOT files. It scans for just the event ID. 
+ *
+ * @detail
+ * Overview
+ * --------
+ * This class is based on the one written in bta_tuple_reader. 
+ * The ROOT files it reads are the same as the ones over there; 
+ * in particular, BtaTupleMaker output generated for the BDtaunu 
+ * analysis. 
+ *
+ * The difference is that it's stripped down to extract only 
+ * eventID's.
+ *
+ * Usage Example
+ * -------------
+ *  
+ *     // Open a ROOT file for reading
+ *     RootReader reader("sp1235r1/root/1.root");
+ *
+ *     // Loop through each event and extract the event ID
+ *     string event_id;
+ *     while (reader.next() != RootReader::kEOF) {
+ *       event_id = reader.get_eventId();
+ *     }
+ */
 class RootReader {
 
   public:

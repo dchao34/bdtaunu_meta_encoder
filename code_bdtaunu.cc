@@ -88,12 +88,12 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   } 
 
-  // Cache event ID's that have already been assigned as well as event weights.
+  // Cache pre-assigned event ID's as well as event weights.
   TableCache cache;
   cache.cache_events("meta/generic_ml_assignment.csv");
   cache.cache_event_weights("meta/event_weights.csv");
 
-  // Data coder
+  // Construct a DataCoder to encode newly encountered events.
   DataCoder coder;
 
   // New assignment file to write
@@ -115,6 +115,7 @@ int main(int argc, char **argv) {
       output.write();
     }
   }
+  cout << endl;
 
   return 0;
 }

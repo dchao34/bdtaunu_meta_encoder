@@ -9,10 +9,9 @@
 using namespace std;
 using namespace custom_cpp_utilities;
 
-TableCache::~TableCache() {
-}
-
 // Hash function that maps data_label and run to a key for weight_cache.
+// Assume 0 <`run` < 10. Simply promote `data_label` by one digit and 
+// make `run` the one's digit. 
 int TableCache::hash_weight_key(int data_label, int run) const {
   return data_label * 10 + run;
 }
@@ -74,13 +73,13 @@ void TableCache::cache_event_weights(string fname) {
   return;
 }
 
-// Check if event_id is in preassigned. 
+// Check if `event_id` is in `event_cache`. 
 bool TableCache::is_cached_event(const string &event_id) const {
   auto it = event_cache.find(event_id);
   return (it != event_cache.end()) ? true : false;
 }
 
-// Get event weight corresponding to specified data_label and run. 
+// Get event weight corresponding to specified `data_label` and `run`. 
 double TableCache::get_event_weight(int data_label, int run) const {
   auto it = weight_cache.find(hash_weight_key(data_label, run));
   return (it == weight_cache.end()) ? -1.0 : it->second;

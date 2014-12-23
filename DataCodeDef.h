@@ -1,9 +1,21 @@
 #ifndef __DATACODEDEF_H__
 #define __DATACODEDEF_H__
 
+/** @file DataCodeDef.h
+ *  @brief Definition of data encodings for events.
+ *
+ * This file defines the meta data assigned to each event in 
+ * the BDtaunu analysis. In particular, each event is given 
+ * a code in each category to indicate its origin and sample
+ * assignment. 
+ *
+ * For more details on the meaning of each category, see README.md.
+ *
+ */
+
 //! Machine learning sample codes
 enum class MLSampleCode {
-  null = -10,              /*!< Undefined */
+  null = -10,             /*!< Undefined */
   unassigned = -1,        /*!< To be assigned. */
   detector = 0,           /*!< Detector data. */ 
   explore = 1,            /*!< Sample for data exploration. */ 
