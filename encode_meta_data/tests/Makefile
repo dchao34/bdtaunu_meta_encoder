@@ -9,7 +9,7 @@ CXXFLAGS += -fPIC
 # Contents
 # --------
 
-BINARIES = code_bdtaunu
+BINARIES = code_bdtaunu test_DataCoder test_TableCache test_AssignmentCsvWriter
 
 # Dependencies
 # ------------
@@ -24,6 +24,13 @@ LDFLAGS += -L $(META_ENCODER_LIB_PATH) $(META_ENCODER_LIBNAME)
 # cern root
 INCFLAGS += $(shell root-config --cflags)
 LDFLAGS += $(shell root-config --libs)
+
+# custom cpp utilities
+CUSTOM_CPP_UTIL_ROOT = /Users/dchao/bdtaunu/custom_cpp_utilities
+INCFLAGS += -I$(CUSTOM_CPP_UTIL_ROOT)
+LDFLAGS += -L$(CUSTOM_CPP_UTIL_ROOT)/lib \
+					 -lCustomCPPUtils \
+					 -Wl,-rpath,$(CUSTOM_CPP_UTIL_ROOT)/lib
 
 # Build Rules
 # -----------
@@ -43,4 +50,4 @@ $(BINARIES) : % : %.cc
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) $(LDFLAGS) -Wl,-rpath,$(META_ENCODER_LIB_PATH) -o $@ $<
 
 clean:
-	rm -f *~ *.o $(BINARIES)
+	rm -f *~ *.o *.out $(BINARIES)

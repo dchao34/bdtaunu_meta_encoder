@@ -12,30 +12,14 @@
 
 using namespace std;
 
-// Get all file names in an ntp directory
-int get_fnames(vector<string> &fname_list, string dirname) {
-
-  DIR *dir;
-  struct dirent *ent;
-
-  // open directory
-  if ((dir = opendir(dirname.c_str())) == NULL) return 1;
-
-  // print all files and directories in the given folder. 
-  while ((ent = readdir(dir)) != NULL) {
-    string fname(ent->d_name);
-    if (fname == "." || fname == "..") continue;
-    fname_list.push_back(dirname + "/" + fname);
-  }
-  closedir(dir);
-  return 0;
-}
-
 /** 
  *  @brief
+ *  Example of using the bdtaunu_meta_encoder libraries. 
  *  Usage: ./code_bdtaunu INPUT_BASE_DIR OUTPUT_FNAME DATA_LABEL RUN
  *
  *  @detail
+ *  This is an example of using the bdtaunu_meta_encoder libraries. 
+ *
  *  Input: 
  *  + Pre-assigned event ID's: These are .csv files, separately for
  *    generic and signal MC events. 
@@ -67,6 +51,25 @@ void print_usage() {
   cout << "INPUT_BASE_DIR OUTPUT_FNAME DATA_LABEL RUN" << endl;
 }
 
+// Get all file names in an ntp directory
+int get_fnames(vector<string> &fname_list, string dirname) {
+
+  DIR *dir;
+  struct dirent *ent;
+
+  // open directory
+  if ((dir = opendir(dirname.c_str())) == NULL) return 1;
+
+  // print all files and directories in the given folder. 
+  while ((ent = readdir(dir)) != NULL) {
+    string fname(ent->d_name);
+    if (fname == "." || fname == "..") continue;
+    fname_list.push_back(dirname + "/" + fname);
+  }
+  closedir(dir);
+  return 0;
+}
+
 int main(int argc, char **argv) {
 
   // Command line parsing.
@@ -87,8 +90,8 @@ int main(int argc, char **argv) {
 
   // Cache pre-assigned event ID's as well as event weights.
   TableCache cache;
-  cache.cache_events("../../cached/generic_ml_assignment.csv");
-  cache.cache_event_weights("../../cached/event_weights.csv");
+  cache.cache_events("cached/generic_ml_assignment.csv");
+  cache.cache_event_weights("cached/event_weights.csv");
 
   // Construct a DataCoder to encode newly encountered events.
   DataCoder coder;
