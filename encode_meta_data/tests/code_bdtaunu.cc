@@ -87,8 +87,8 @@ int main(int argc, char **argv) {
 
   // Cache pre-assigned event ID's as well as event weights.
   TableCache cache;
-  cache.cache_events("../cached/generic_ml_assignment.csv");
-  cache.cache_event_weights("../cached/event_weights.csv");
+  cache.cache_events("../../cached/generic_ml_assignment.csv");
+  cache.cache_event_weights("../../cached/event_weights.csv");
 
   // Construct a DataCoder to encode newly encountered events.
   DataCoder coder;
