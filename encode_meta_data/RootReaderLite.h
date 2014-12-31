@@ -1,5 +1,5 @@
-#ifndef __ROOTREADER_H__
-#define __ROOTREADER_H__
+#ifndef __ROOTREADERLITE_H__
+#define __ROOTREADERLITE_H__
 
 #include <TFile.h>
 #include <TTree.h>
@@ -23,15 +23,15 @@
  * -------------
  *  
  *     // Open a ROOT file for reading
- *     RootReader reader("sp1235r1/root/1.root");
+ *     RootReaderLite reader("sp1235r1/root/1.root");
  *
  *     // Loop through each event and extract the event ID
  *     string event_id;
- *     while (reader.next() != RootReader::kEOF) {
+ *     while (reader.next() != RootReaderLite::kEOF) {
  *       event_id = reader.get_eventId();
  *     }
  */
-class RootReader {
+class RootReaderLite {
 
   public:
 
@@ -42,7 +42,7 @@ class RootReader {
     };
 
     //! Constructor with specified root file name and TTree name. 
-    RootReader(const char *root_fname, const char *root_trname = "ntp1");
+    RootReaderLite(const char *root_fname, const char *root_trname = "ntp1");
 
     //! Read in the next event from the TTree. 
     Status next_record();
@@ -51,10 +51,10 @@ class RootReader {
     std::string get_eventId() const;
 
     //! Default constructor. 
-    RootReader() = default;
+    RootReaderLite() = default;
 
     //! Destructor
-    ~RootReader();
+    ~RootReaderLite();
 
   private:
 

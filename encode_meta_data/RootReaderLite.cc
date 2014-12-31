@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 
-#include "RootReader.h"
+#include "RootReaderLite.h"
 
 using namespace std;
 
-RootReader::RootReader(
+RootReaderLite::RootReaderLite(
   const char *root_fname, 
   const char *root_trname) : 
   tfile(nullptr), tr(nullptr), record_index(0) {
@@ -19,7 +19,7 @@ RootReader::RootReader(
   ClearBuffer();
 }
 
-RootReader::~RootReader() {
+RootReaderLite::~RootReaderLite() {
   if (tfile != 0) { 
     tfile->Close();
     delete tfile;
@@ -27,7 +27,7 @@ RootReader::~RootReader() {
 }
 
 // Responsible for opening the TFile and getting the TTree.
-void RootReader::PrepareTreeFile(const char *root_fname, 
+void RootReaderLite::PrepareTreeFile(const char *root_fname, 
                                  const char *root_trname) {
 
   tfile = new TFile(root_fname, "r");
@@ -49,7 +49,7 @@ void RootReader::PrepareTreeFile(const char *root_fname,
 }
 
 // Read in the next event from the TTree. 
-RootReader::Status RootReader::next_record() {
+RootReaderLite::Status RootReaderLite::next_record() {
   ClearBuffer();
   if (record_index < total_records) {
     tr->GetEntry(record_index++);
@@ -59,14 +59,14 @@ RootReader::Status RootReader::next_record() {
   }
 }
 
-string RootReader::get_eventId() const {
+string RootReaderLite::get_eventId() const {
   return to_string(platform)
          + ":" + to_string(partition)
          + ":" + to_string(upperID)
          + "/" + to_string(lowerID);
 }
 
-void RootReader::ClearBuffer() {
+void RootReaderLite::ClearBuffer() {
   platform = -999;
   partition = -999;
   upperID = -999;

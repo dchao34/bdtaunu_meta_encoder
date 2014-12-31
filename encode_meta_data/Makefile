@@ -12,7 +12,7 @@ LIBNAME = libMetaEncoder.so
 PKG_LIBPATH = ../lib
 
 # package contents
-SOURCES = RootReader.cc RandomNumbers.cc DataCoder.cc \
+SOURCES = RootReaderLite.cc RandomNumbers.cc DataCoder.cc \
 					TableCache.cc AssignmentCsvWriter.cc
 
 # Dependencies

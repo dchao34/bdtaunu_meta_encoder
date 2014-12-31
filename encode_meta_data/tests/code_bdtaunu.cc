@@ -6,7 +6,7 @@
 #include <dirent.h>
 
 #include <encode_meta_data/TableCache.h>
-#include <encode_meta_data/RootReader.h>
+#include <encode_meta_data/RootReaderLite.h>
 #include <encode_meta_data/DataCoder.h>
 #include <encode_meta_data/AssignmentCsvWriter.h>
 
@@ -102,8 +102,8 @@ int main(int argc, char **argv) {
   for (auto fname : fname_list) {
     cout << "."; cout.flush();
 
-    RootReader reader(fname.c_str());
-    while (reader.next_record() != RootReader::Status::kEOF) {
+    RootReaderLite reader(fname.c_str());
+    while (reader.next_record() != RootReaderLite::Status::kEOF) {
       if (cache.is_cached_event(reader.get_eventId())) continue;
       output.set_event_id(reader.get_eventId());
       output.set_data_source(coder.CodeDataSource(data_label));
