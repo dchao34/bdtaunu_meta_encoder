@@ -71,6 +71,47 @@ int main() {
   cout << cache->get_event_weight(1237, 9) << " ";
   cout << cache->get_event_weight(11444, -1) << endl;
   cout << endl;
+  delete csv_reader;
+
+  cout << "Test 4: Check that ml_sample and division are correctly cached. " << endl;
+  csv_reader = new CsvReader("cached/generic_ml_assignment.csv", "|");
+  while (csv_reader->next()) {
+    string event_id = csv_reader->get("event_id");
+    string ml_sample = csv_reader->get("ml_sample");
+    string division = csv_reader->get("division");
+    if (cache->get_ml_sample(event_id) != ml_sample) {
+      cout << "Failed" << endl;
+      break;
+    }
+    if (cache->get_division(event_id) != division) {
+      cout << "Failed" << endl;
+      break;
+    }
+  }
+  delete csv_reader;
+  csv_reader = new CsvReader("cached/sigmc_ml_assignment.csv", "|");
+  while (csv_reader->next()) {
+    string event_id = csv_reader->get("event_id");
+    string ml_sample = csv_reader->get("ml_sample");
+    string division = csv_reader->get("division");
+    if (cache->get_ml_sample(event_id) != ml_sample) {
+      cout << "Failed" << endl;
+      break;
+    }
+    if (cache->get_division(event_id) != division) {
+      cout << "Failed" << endl;
+      break;
+    }
+  }
+  delete csv_reader;
+  cout << "Passed" << endl;
+  cout << endl;
+
+  cout << "Test 5: Check that ml_sample and division are empty for a few non-cached event. " << endl;
+  cout << "Next few lines should be empty." << endl;
+  cout << cache->get_ml_sample("10310") << cache->get_division("10310") << endl;
+  cout << cache->get_ml_sample("1002310/2310:-1") << cache->get_division("1002310/2310:-1") << endl;
+  cout << cache->get_ml_sample("abcd") << cache->get_division("abcd") << endl;
 
   return 0;
 }

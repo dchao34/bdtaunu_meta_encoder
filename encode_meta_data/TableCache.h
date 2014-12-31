@@ -40,6 +40,10 @@
  *     // Check if an event with event ID "31415926" is already assigned
  *     bool is_preassigned = cache.is_cached_event("31415926");
  *
+ *     // Get the `ml_sample` and `division` assignment of that event
+ *     string ml_sample = cache.get_ml_sample("31415926");
+ *     string division = cache.get_division("31415926");
+ *
  *     // Look up the event weight for events from run 3 of sp mode 1235
  *     double wgt = get_event_weight(1235, 3);
  *
@@ -59,6 +63,16 @@ class TableCache {
     //! Check whether `event_id` is in the cache. 
     bool is_cached_event(const std::string &event_id) const;
 
+    //! Get `ml_sample` assignment of a cached event.
+    /*! Returns `ml_sample` if `event_id` is in the cache.
+     *  Otherwise, return empty string. */
+    std::string get_ml_sample(const std::string &event_id) const;
+
+    //! Get `division` assignment of a cached event.
+    /*! Returns `division` if `event_id` is in the cache.
+     *  Otherwise, return empty string. */
+    std::string get_division(const std::string &event_id) const;
+
     //! Look up event weight for events from run `run` of type `data_label`
     double get_event_weight(int data_label, int run) const;
 
@@ -66,6 +80,8 @@ class TableCache {
 
     // Cached data. Data read from .csv are saved in these data structures. 
     std::set<std::string> event_cache;
+    std::map<std::string, std::string> mlsample_cache;
+    std::map<std::string, std::string> division_cache;
     std::map<int, double> weight_cache;
 
     // Hashes a `data_label`/`run` combination to a `weight_cache` key.

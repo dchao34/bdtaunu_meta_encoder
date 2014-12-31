@@ -32,10 +32,18 @@ void TableCache::cache_events(string fname) {
 
   // Use CsvReader to stream through the table of preassigned events. 
   // See custom_cpp_utilities/CsvReader.h for its documentation.
+  string event_id, ml_sample, division;
   CsvReader reader(fname.c_str(), "|");
   while (reader.next()) { 
-    auto p = event_cache.insert(reader.get("event_id"));
+    event_id = reader.get("event_id");
+    ml_sample = reader.get("ml_sample");
+    division = reader.get("division");
+    auto p = event_cache.insert(event_id);
     assert(p.second);
+    auto m = mlsample_cache.insert(make_pair(event_id, ml_sample));
+    assert(m.second);
+    auto d = division_cache.insert(make_pair(event_id, division));
+    assert(d.second);
   }
   return;
 }
@@ -77,6 +85,18 @@ void TableCache::cache_event_weights(string fname) {
 bool TableCache::is_cached_event(const string &event_id) const {
   auto it = event_cache.find(event_id);
   return (it != event_cache.end()) ? true : false;
+}
+
+// Get `ml_sample` assigned to specified `event_id`.
+std::string TableCache::get_ml_sample(const string &event_id) const {
+  auto it = mlsample_cache.find(event_id);
+  return (it == mlsample_cache.end()) ? "" : it->second;
+}
+
+// Get `division` assigned to specified `event_id`.
+std::string TableCache::get_division(const string &event_id) const {
+  auto it = division_cache.find(event_id);
+  return (it == division_cache.end()) ? "" : it->second;
 }
 
 // Get event weight corresponding to specified `data_label` and `run`. 
