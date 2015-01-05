@@ -85,6 +85,12 @@ DataSourceCode DataCoder::CodeDataSource(int data_label) const {
     case 1237:
       return DataSourceCode::generic2;
       break;
+    case 11444:
+    case 11445:
+    case 11446:
+    case 11447:
+      return DataSourceCode::signal1;
+      break;
     default:
       cerr << endl;
       cerr << "(WARNING) CodeDataSoure: ";

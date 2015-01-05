@@ -133,8 +133,10 @@ int main() {
   cout << endl;
 
   cout << "Test 5: DataSource test. " << endl;
-  cout << "The first two lines must be all 0's and all 3's respectively. ";
-  cout << "This is followed by a warning line and a -1; this occurs three times. " << endl; 
+  cout << "The first line must be all 0's. " << endl;
+  cout << "The second line must be all 3's. " << endl;
+  cout << "The third line must be all 1's. " << endl;
+  cout << "This is followed by a warning line and a -1." << endl; 
   c = new DataCoder;
   cout << static_cast<int>(c->CodeDataSource(0)) << " ";
   cout << static_cast<int>(c->CodeDataSource(1)) << " " << endl;
@@ -142,9 +144,9 @@ int main() {
   cout << static_cast<int>(c->CodeDataSource(1005)) << " ";
   cout << static_cast<int>(c->CodeDataSource(1235)) << " ";
   cout << static_cast<int>(c->CodeDataSource(1237)) << " " << endl;
+  cout << static_cast<int>(c->CodeDataSource(11444)) << " ";
+  cout << static_cast<int>(c->CodeDataSource(11445)) << " " << endl;
   cout << static_cast<int>(c->CodeDataSource(11440)) << endl;
-  cout << static_cast<int>(c->CodeDataSource(11444)) << endl;
-  cout << static_cast<int>(c->CodeDataSource(11445)) << endl;
   delete c;
   cout << endl;
 
